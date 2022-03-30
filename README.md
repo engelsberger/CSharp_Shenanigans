@@ -1,2 +1,2 @@
 # simpleSolutions
-simple solutions to simple problems
+simple solutions to simple problems (using C#)
