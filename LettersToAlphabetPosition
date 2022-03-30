@@ -1,8 +1,9 @@
 public string LettersToAlphabetPosition(string text)
 {
+
     // #1 CONVERT LETTERS TO ALPHABET POSITION SEPARATED WITH SPACE - IGNORE NON-LETTER CHARACTERS
 
-    //return string.Join(" ", text.ToLower().Where(char.IsLetter).Select(c => c - 'a' + 1));
+    return string.Join(" ", text.ToLower().Where(char.IsLetter).Select(c => c - 'a' + 1));
 
     /* #1 STEP 1: text.ToLower()
      * Convert all letters to lower case, since in Unicode char 'a' has a different position than char 'A'
@@ -39,7 +40,7 @@ public string LettersToAlphabetPosition(string text)
 
     //#2 ADD A LINEBREAK AFTER A WORD - ONELINER
 
-    //return string.Join("\r\n", text.ToLower().Split(' ').Select(word => string.Join(" ", word.Where(char.IsLetter).Select(c => c - 'a' + 1))));
+    return string.Join("\r\n", text.ToLower().Split(' ').Select(word => string.Join(" ", word.Where(char.IsLetter).Select(c => c - 'a' + 1))));
 
     /* #2 STEP 1: text.ToLower().Split(' ')
      * Get input text and convert it to lower case letters (to make the code case insensitive).
@@ -70,7 +71,7 @@ public string LettersToAlphabetPosition(string text)
         return convertedWord;
     });
     string output = string.Join("\r\n", convertedWords);
-    //return output;
+    return output;
 
     /* words:
      * A string array containing the (lowercase) input string split by spaces
