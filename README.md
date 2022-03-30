@@ -1,4 +1,4 @@
 # simpleSolutions
-Simple solutions for simple problems (using C#).
+Simple solutions for simple problems including (hopefully) understandable explanations. Written in C#.
 
 Free to use for everyone.
