@@ -8,11 +8,11 @@ public string LettersToAlphabetPosition(string text)
     /* #1 STEP 1: text.ToLower()
      * Convert all letters to lower case, since in Unicode char 'a' has a different position than char 'A'
      * 
-     * #1 STEP 2: #1STEP1.Where(char.IsLetter)
+     * #1 STEP 2: STEP1.Where(char.IsLetter)
      * Get every char in string "text" that is categorized as a Unicode letter (this also includes
      * special letters like ø or ñ, but for these the calculated position in the alphabet won't be correct)
      * 
-     * #1 STEP 3: #1STEP2.Select(c => c)
+     * #1 STEP 3: STEP2.Select(c => c)
      * .Select() will be executed for each char c found by the .Where() function.
      * "c" is simply the variable name you give the char, you can also name this "x" or "geoff".
      * The "=>" indicates a so called lambda expression, which basically takes input parameters on the left
@@ -20,7 +20,7 @@ public string LettersToAlphabetPosition(string text)
      * as a list containing all output values.
      * (WARNING: type "IEnumerable<>" is not the same as type "List<>", for more info here check microsoft docs)
      * 
-     * #1 STEP 4: #1STEP2.Select(c => c - 'a' + 1)
+     * #1 STEP 4: STEP2.Select(c => c - 'a' + 1)
      * Input (from lambda expression): char 'c'. Expected Output: alphabet position as integer
      * We can get that by simply subtracting char 'a' from our input char and adding 1.
      * This converts the char variables to their relative integers according to the ASCII list
@@ -28,11 +28,11 @@ public string LettersToAlphabetPosition(string text)
      *     'd' - 'a' + 1    >int value for 'd' is 100 and 'a' is 97 (check ASCII list)
      *     100 - 97 + 1 = 2  >output value for input 'd' is 4 - alphabet position found
      * 
-     * #1 STEP 5: string.Join(" ", #1STEP4);
+     * #1 STEP 5: string.Join(" ", STEP4);
      * .Join() gets all output values and joins them together to a string, different values separated by
      * a whitespace. The separation string can be anything, from nothing "" to full descriptions "\r\nNext:"
      * 
-     * #1 STEP 6: return #1STEP5
+     * #1 STEP 6: return STEP5
      * Returns the string we got from the string.Join() function. Job done.
      */
 
@@ -46,16 +46,16 @@ public string LettersToAlphabetPosition(string text)
      * Get input text and convert it to lower case letters (to make the code case insensitive).
      * string.Split() returns a string array where the original array is split by the specified char (in this case whitespace)
      * 
-     * #2 STEP 2: #2STEP1.Select(word => #1)
+     * #2 STEP 2: STEP1.Select(word => #1)
      * .Select() gets a string array from .Split() and runs through every string in there.
      * Lambda expression as mentioned in #1 STEP 3 has input variable "word" as string and does for each word
      * basically the same thing #1 does (convert letters to alphabet positions).
      * 
-     * #2 STEP 3: string.Join("\r\n", #2STEP2)
+     * #2 STEP 3: string.Join("\r\n", STEP2)
      * Gets an IEnumerator<string> (which can be treated as list here - not the same though) containing the
      * converted words, puts them together and puts linebreaks in between.
      * 
-     * #2 STEP 4: return #2STEP3
+     * #2 STEP 4: return STEP3
      * Returns the converted words separated by a linebreak. Job done.
      */
 
@@ -64,31 +64,33 @@ public string LettersToAlphabetPosition(string text)
     //#2 ADD A LINEBREAK AFTER A WORD - WRITTEN EASIER TO UNDERSTAND
 
     string[] words = text.ToLower().Split(' ');
-    IEnumerable<string> convertedWords = words.Select(word =>
-    {
-        IEnumerable<int> alphabetValues = word.Where(char.IsLetter).Select(c => c - 'a' + 1);
-        string convertedWord = string.Join(" ", alphabetValues);
-        return convertedWord;
-    });
-    string output = string.Join("\r\n", convertedWords);
+    string output = string.Empty;
+    foreach(string word in words){
+        foreach(char c in word){
+            if(char.IsLetter(c)) output += (c - 'a' + 1).ToString() + " ";
+        }
+        output += "\r\n";
+    }
     return output;
 
     /* words:
-     * A string array containing the (lowercase) input string split by spaces
-     * 
-     * convertedWords:
-     * An IEnumerable<string> containing strings with the converted words. Basically ran Method #1 over
-     * every word in string[] words and put the output strings together here.
-     * 
-     * alphabetValues: (created for every word in string[] words)
-     * An IEnumerable of type int, containing the integer alphabet position for each letter in a word.
-     * Determined by using Method #1.
-     * 
-     * convertedWord: (created for every word in string[] words)
-     * A string containing the alphabet positions for each letter in a word, separated by spaces.
+     * A string array containing the (lowercase) input string split by spaces.
      * 
      * output:
-     * contains the full output, where each converted word is separated by a linebreak.
+     * String to which the converted letters and linebreaks will be added bit by bit.
+     * 
+     * foreach(string word in words){}
+     * Runs once for every string x in the string array words.
+     * 
+     * foreach(char c in word){}
+     * Runs once for every char x in the given string word.
+     * 
+     * if(char.IsLetter(c)) output += (c - 'a' + 1).ToString() + " ";
+     * Checks if the given char is considered a Unicode letter, if so figures out the alphabet position,
+     * converts the position integer to a string, adds a space and adds this to the output string.
+     *
+     * output += "\r\n";
+     * Adds a linebreak to output. Will be executed once per word in this code.
      */
 
 
