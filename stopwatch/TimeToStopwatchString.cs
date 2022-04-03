@@ -1,5 +1,3 @@
-
-
 private string TimeToStopwatchString(float time)
 {
     /* TIME IN SECONDS (corresponding to Time.deltaTime by Unity)
