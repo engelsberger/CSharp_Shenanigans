@@ -1,4 +1,4 @@
-private string TimeToStopwatchString(float time)
+public string TimeToStopwatchString(float time)
 {
     /* TIME IN SECONDS (corresponding to Time.deltaTime by Unity)
      * Returns given time in format 00:00:00 (min:sec:millisec) as string.
