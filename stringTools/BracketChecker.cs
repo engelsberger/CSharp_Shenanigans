@@ -4,7 +4,7 @@
  * returns "Missing brackets: xxxx" if brackets can simply be added at the end of the string
  * returns "Bad bracket "x" at index x" the first bad bracket detected (a "bad" bracket is a closing one without an opening one before)
 
-static string BracketChecker(string s)
+public string BracketChecker(string s)
 {
     int parantehses = 0;    // ()
     int square = 0;         // []
