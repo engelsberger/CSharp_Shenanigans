@@ -1,0 +1,23 @@
+/* RETURNS THE N-TH SMALLEST HAMMING NUMBER
+ *
+ * A hamming number is calculated with the formula: 2^i * 3^j * 5^k
+ * Ex: 7th smallest Hamming number is 8 (2^3 * 3^0 * 5^0)
+ */
+
+public long Hamming(int n)
+{
+    long[] ham = new long[n];
+    long x2 = 2, x3 = 3, x5 = 5;
+    int i = 0, j = 0, k = 0;
+
+    ham[0] = 1;
+
+    for (int index = 1; index < n; index++)
+    {
+        ham[index] = Math.Min(x2, Math.Min(x3, x5));
+        if (ham[index] == x2) x2 = 2 * ham[i = i + 1]; // i++ doesn't work right here
+        if (ham[index] == x3) x3 = 3 * ham[j = j + 1];
+        if (ham[index] == x5) x5 = 5 * ham[k = k + 1];
+    }
+    return ham[^1];
+}
